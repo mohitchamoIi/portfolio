@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MOHIT CHAMOLI Portfolio - Showcasing my skills, projects, and contact information.">
+    <meta property="og:title" content="MOHIT CHAMOLI">
+    <meta property="og:description" content="MOHIT CHAMOLI - Showcasing my skills, projects, and contact information.">
+    <meta property="og:image" content="path/to/your-thumbnail-image.jpg">
+    <meta property="og:url" content="your-portfolio-url">
+    <title>MOHIT CHAMOLI <br></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin: 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            color: #00ffff;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+
+        section p {
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        #skills .skill-item {
+            background-color: #333333;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        #skills .skill-item i {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+        }
+
+        #skills .skill-item:hover {
+            transform: scale(1.1);
+            background-color: #444444;
+        }
+
+        #projects .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        #projects .project-item {
+            background-color: #333333;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        #projects .project-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #projects .project-item img {
+            width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        #projects .project-item button {
+            background-color: #00ffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #projects .project-item button:hover {
+            background-color: #00cccc;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        form label {
+            text-align: left;
+            color: #cccccc;
+        }
+
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        form input, form textarea {
+            background-color: #333333;
+            color: #ffffff;
+            transition: background-color 0.3s;
+        }
+
+        form input:hover, form textarea:hover {
+            background-color: #444444;
+        }
+
+        form button {
+            background-color: #00ffff;
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #00cccc;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            text-align: center;
+            padding: 2rem;
+            color: #999999;
+        }
+
+        footer .social-icons {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        footer .social-icons a {
+            color: #00ffff;
+            font-size: 2rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer .social-icons a:hover {
+            color: #00cccc;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lead {
+    font-size: 1.5rem;
+    color: #00ffff;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.lead::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 3px;
+    width: 30px;
+    background: #00ffff;
+    transform: translateY(-50%);
+}
+
+.specialties {
+    text-align: left;
+    margin: 2rem 0;
+    padding-left: 1.5rem;
+}
+
+.specialties li {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border-left: 2px solid #00ffff7d;
+    transition: all 0.3s ease;
+}
+
+.specialties li:hover {
+    border-left-color: #00ffff;
+    background: #2a2a2a;
+    transform: translateX(10px);
+}
+
+.highlight {
+    color: #00ffff;
+    font-weight: 600;
+}
+
+.skill-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    background: #2a2a2a;
+    border-radius: 15px;
+    border: 1px solid #363636;
+}
+
+.skill-tag {
+    background: #363636;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background: #00ffff;
+    color: #1a1a1a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+    margin-right: 0.8rem;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+    .about-skills {
+        order: -1;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mohit Chamoli</h1><br>
+        <nav>
+            <ul>
+                <li><a href="https://mohitchamoii.github.io/portfolio/">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about" class="fade-in">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p class="lead">:Transforming ideas into digital solutions through code and creativity.</p>
+                <div class="bio">
+                    <p>As a passionate software engineering student, I thrive in the dynamic intersection of <span class="highlight">problem-solving</span> and <span class="highlight">innovation</span>. My journey revolves around:</p>
+                    
+                    <ul class="specialties">
+                        <li><i class="fas fa-cogs pulse"></i>Crafting elegant, user-centric software architectures</li>
+                        <li><i class="fas fa-brain pulse"></i>Exploring AI/ML frameworks and their real-world applications</li>
+                        <li><i class="fas fa-mobile-alt pulse"></i>Building responsive full-stack applications</li>
+                    </ul>
+    
+                    <p>When I'm not immersed in code, you'll find me contributing to open-source projects, experimenting with new tech stacks, or mentoring peers in development fundamentals. I believe in <span class="highlight">continuous growth</span> – currently deepening my expertise in cloud technologies and system design patterns.</p>
+                </div>
+            </div>
+            <div class="about-skills">
+                <div class="skill-cloud">
+                    <span class="skill-tag">Algorithm Design</span>
+                    <span class="skill-tag">Agile Development</span>
+                    <span class="skill-tag">UI/UX Principles</span>
+                    <span class="skill-tag">DevOps Basics</span>
+                    <span class="skill-tag">Code Optimization</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="skills" class="fade-in">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-item"><i class="fas fa-code"></i><p>C Language</p></div>
+            <div class="skill-item"><i class="fab fa-python"></i><p>Python</p></div>
+            <div class="skill-item"><i class="fab fa-java"></i><p>Java</p></div>
+            <div class="skill-item"><i class="fab fa-html5"></i><p>HTML</p></div>
+            <div class="skill-item"><i class="fab fa-css3-alt"></i><p>CSS</p></div>
+            <div class="skill-item"><i class="fas fa-ellipsis-h"></i><p>Others</p></div>
+        </div>
+    </section>
+
+    <section id="projects" class="fade-in">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-item">
+                <img src="path/to/project1-thumbnail.jpg" alt="Project 1 Thumbnail">
+                <h3>Project 1</h3>
+                <p>A brief description of the project goes here.</p>
+                <button onclick="window.location.href='https://link-to-project1.com';">View Project</button>
+            </div>
+            <div class="project-item">
+                <img src="path/to/project2-thumbnail.jpg" alt="Project 2 Thumbnail">
+                <h3>Project 2</h3>
+                <p>A brief description of the project goes here.</p>
+                <button onclick="window.location.href='https://link-to-project2.com';">View Project</button>
+            </div>
+            <div class="project-item">
+                <img src="path/to/project3-thumbnail.jpg" alt="Project 3 Thumbnail">
+                <h3>Project 3</h3>
+                <p>A brief description of the project goes here.</p>
+                <button onclick="window.location.href='https://link-to-project3.com';">View Project</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+        <h2>Contact</h2>
+        <form>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Your Name">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Your Email">
+            <label for="message">Your Message</label>
+            <textarea id="message" placeholder="Your Message"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        &copy; 2025 Mohit Chamoli. All rights reserved.
+        <div class="social-icons">
+            <a href="https://github.com/mohitchamoIi" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://in.linkedin.com/in/mohit-chamoli-a837a7348" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/mohitchamoli" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
