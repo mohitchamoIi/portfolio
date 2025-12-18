@@ -665,7 +665,253 @@
                 padding: 2rem;
             }
         }
+        /* Project Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Container */
+.modal-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9) translateY(30px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 30px 90px rgba(0, 255, 255, 0.15);
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+}
+
+.modal-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 45px;
+    height: 45px;
+    background: rgba(13, 17, 23, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: var(--primary-cyan);
+    transform: rotate(90deg);
+    border-color: var(--primary-cyan);
+}
+
+.modal-close i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Modal Content */
+.modal-content {
+    padding: 3rem;
+}
+
+.modal-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal-meta {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.meta-item i {
+    color: var(--primary-cyan);
+}
+
+/* Tech Stack Tags */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 2rem 0;
+}
+
+.tech-tag {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--primary-cyan);
+    font-weight: 500;
+}
+
+/* Project Details */
+.project-section {
+    margin: 2.5rem 0;
+}
+
+.project-section h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.project-section p, .project-section li {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    padding: 0.8rem 0;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.feature-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary-cyan);
+    font-weight: bold;
+}
+
+/* Action Buttons */
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.modal-btn-primary {
+    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+    color: var(--primary-dark);
+}
+
+.modal-btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.modal-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+}
+
+/* Scrollbar Styling */
+.modal-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+    background: var(--primary-cyan);
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-container {
+        max-height: 95vh;
+        margin: 1rem;
+    }
+    
+    .modal-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .modal-title {
+        font-size: 2rem;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+}
+
     </style>
+    
 </head>
 <body>
     <header>
@@ -832,48 +1078,247 @@
             </a>
         </div>
     </footer>
+<script>
+    // Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    <script>
-        // Dynamic Year
-        document.getElementById('year').textContent = new Date().getFullYear();
+    // Project Data with detailed information
+    const projectsData = {
+        'giftlink': {
+            title: 'Giftlink',
+            image: 'project1-thumbnail.jpg',
+            github: 'https://github.com/mohitchamoIi/fullstack-capstone-project',
+            live: 'https://giftlink-demo.vercel.app',
+            description: 'A full-stack e-commerce platform enabling users to discover and send personalized gifts with a seamless checkout experience.',
+            overview: 'Giftlink revolutionizes gift-giving by providing an intuitive platform where users can browse curated gift collections, manage their cart, and complete secure transactions. Built with modern web technologies, it demonstrates proficiency in full-stack development, payment integration, and responsive design.',
+            role: 'Full-Stack Developer',
+            duration: '3 months',
+            tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe API', 'JWT Auth'],
+            features: [
+                'User authentication with JWT tokens and secure session management',
+                'Product catalog with advanced filtering, sorting, and search functionality',
+                'Shopping cart with persistent state across sessions',
+                'Integrated Stripe payment gateway for secure transactions',
+                'Order tracking and history dashboard',
+                'Responsive design optimized for mobile, tablet, and desktop'
+            ],
+            challenges: 'Implemented real-time cart synchronization across multiple devices, handled payment webhook security, and optimized database queries for product filtering.',
+            learnings: 'Gained deep understanding of payment gateway integration, secure authentication patterns, and state management in distributed systems.'
+        },
+        'cypher-fusion': {
+            title: 'Cypher Fusion',
+            image: 'project2-thumbnail.jpg',
+            github: 'https://github.com/mohitchamoIi/hybrid-cryptography',
+            live: null,
+            description: 'Advanced GUI-based encryption application implementing hybrid cryptography for secure data protection.',
+            overview: 'Cypher Fusion combines symmetric and asymmetric encryption algorithms to provide military-grade data security. The application features an intuitive graphical interface built with Python and Tkinter, making complex cryptographic operations accessible to non-technical users.',
+            role: 'Lead Developer',
+            duration: '2 months',
+            tech: ['Python', 'Tkinter', 'PyCryptodome', 'RSA', 'AES', 'SHA-256'],
+            features: [
+                'Hybrid encryption using AES-256 for data and RSA-2048 for key exchange',
+                'Secure key generation and management system',
+                'File encryption/decryption with progress indicators',
+                'Password-protected private key storage',
+                'Digital signature generation for data integrity verification',
+                'Clean, intuitive GUI with real-time encryption status'
+            ],
+            challenges: 'Balancing security with performance for large file encryption, implementing proper key derivation functions, and creating an intuitive UX for complex cryptographic concepts.',
+            learnings: 'Mastered cryptographic principles, key management best practices, and the importance of user-friendly security implementations.'
+        },
+        'unibus': {
+            title: 'Unibus - University Bus Tracking',
+            image: 'project3-thumbnail.jpg',
+            github: 'https://github.com/mohitchamoIi/unibus',
+            live: 'https://unibus-beta.vercel.app/',
+            description: 'Real-time university bus tracking system streamlining campus transportation operations.',
+            overview: 'Unibus solves the common problem of unreliable campus transportation by providing real-time GPS tracking of university buses. Students can view bus locations, estimated arrival times, and route information through an interactive map interface. The system includes admin dashboards for managing routes, schedules, and driver assignments.',
+            role: 'Full-Stack Developer & Team Lead',
+            duration: '4 months',
+            tech: ['HTML/CSS', 'JavaScript', 'Node.js', 'Google Maps API', 'Oracle Database', 'Socket.io'],
+            features: [
+                'Real-time bus location tracking with Google Maps integration',
+                'Estimated time of arrival (ETA) calculations using route algorithms',
+                'Interactive route visualization with stop markers',
+                'Admin dashboard for route management and driver coordination',
+                'Student interface with favorite routes and notifications',
+                'WebSocket-based live updates for instant location refresh'
+            ],
+            challenges: 'Handling GPS coordinate updates efficiently, optimizing map rendering performance, implementing accurate ETA algorithms accounting for traffic, and ensuring system reliability during peak usage hours.',
+            learnings: 'Developed expertise in geolocation APIs, real-time data streaming with WebSockets, database optimization for location queries, and collaborative team development workflows using Git.'
+        }
+    };
 
-        // Scroll Animation Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+    // Update project buttons to open modals
+    document.querySelectorAll('.project-item button').forEach((button, index) => {
+        const projectKeys = Object.keys(projectsData);
+        const projectKey = projectKeys[index];
+        
+        button.addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
+            openProjectModal(projectKey);
         });
+    });
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+    // Create modal HTML structure
+    const modalHTML = `
+        <div class="modal-overlay" id="projectModal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <img src="" alt="Project preview" id="modalImage">
+                    <div class="modal-close" onclick="closeProjectModal()">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="modal-content">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-user"></i>
+                            <span id="modalRole"></span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="modalDuration"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-stack" id="modalTech"></div>
+                    
+                    <div class="project-section">
+                        <h3>Project Overview</h3>
+                        <p id="modalOverview"></p>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3>Key Features</h3>
+                        <ul class="feature-list" id="modalFeatures"></ul>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3>Technical Challenges</h3>
+                        <p id="modalChallenges"></p>
+                    </div>
+                    
+                    <div class="project-section">
+                        <h3>What I Learned</h3>
+                        <p id="modalLearnings"></p>
+                    </div>
+                    
+                    <div class="modal-actions" id="modalActions"></div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Open modal function
+    function openProjectModal(projectKey) {
+        const project = projectsData[projectKey];
+        const modal = document.getElementById('projectModal');
+        
+        // Populate modal content
+        document.getElementById('modalImage').src = project.image;
+        document.getElementById('modalTitle').textContent = project.title;
+        document.getElementById('modalRole').textContent = project.role;
+        document.getElementById('modalDuration').textContent = project.duration;
+        document.getElementById('modalOverview').textContent = project.overview;
+        document.getElementById('modalChallenges').textContent = project.challenges;
+        document.getElementById('modalLearnings').textContent = project.learnings;
+        
+        // Populate tech stack
+        const techContainer = document.getElementById('modalTech');
+        techContainer.innerHTML = project.tech.map(tech => 
+            `<span class="tech-tag">${tech}</span>`
+        ).join('');
+        
+        // Populate features
+        const featuresContainer = document.getElementById('modalFeatures');
+        featuresContainer.innerHTML = project.features.map(feature => 
+            `<li>${feature}</li>`
+        ).join('');
+        
+        // Populate action buttons
+        const actionsContainer = document.getElementById('modalActions');
+        let actionsHTML = `
+            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-secondary">
+                <i class="fab fa-github"></i> View Code
+            </a>
+        `;
+        if (project.live) {
+            actionsHTML += `
+                <a href="${project.live}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+            `;
+        }
+        actionsContainer.innerHTML = actionsHTML;
+        
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal function
+    function closeProjectModal() {
+        const modal = document.getElementById('projectModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close on overlay click
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            closeProjectModal();
+        }
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeProjectModal();
+        }
+    });
+
+    // Scroll Animation Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
-    </script>
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        this.reset();
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
 
