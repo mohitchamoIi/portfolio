@@ -394,93 +394,148 @@
             color: var(--primary-blue);
         }
 
-        /* Projects Grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
+        /* Compact Projects Grid */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.8rem;
+    margin-top: 3rem;
+}
 
-        .project-item {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            padding: 0;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
+.project-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    cursor: pointer;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+}
 
-        .project-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 204, 255, 0.05));
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 1;
-        }
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 204, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1;
+    pointer-events: none;
+}
 
-        .project-item:hover::before {
-            opacity: 1;
-        }
+.project-item:hover::before {
+    opacity: 1;
+}
 
-        .project-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
+.project-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
 
-        .project-item:hover img {
-            transform: scale(1.1);
-        }
+.project-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
 
-        .project-content {
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
-        }
+.project-item:hover img {
+    transform: scale(1.1);
+}
 
-        .project-item h3 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(13, 17, 23, 0.9) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
-        .project-item p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
+.project-item:hover .project-overlay {
+    opacity: 1;
+}
 
-        .project-item button {
-            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            color: var(--primary-dark);
-            width: 100%;
-        }
+.view-details-btn {
+    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+    color: var(--primary-dark);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
 
-        .project-item button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-        }
+.project-content {
+    padding: 1.5rem;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-        .project-item:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 60px rgba(0, 255, 255, 0.25);
-            border-color: rgba(0, 255, 255, 0.3);
-        }
+.project-item h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.project-brief {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 255, 255, 0.2);
+    border-color: rgba(0, 255, 255, 0.3);
+}
+
+/* Remove old button styles */
+.project-item button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .project-item {
+        height: 300px;
+    }
+    
+    .project-image-container {
+        height: 180px;
+    }
+}
 
         /* Contact Form */
         form {
@@ -1005,41 +1060,88 @@
         </section>
 
         <section id="projects" class="fade-in">
-            <h2>Featured Projects</h2>
-            <p class="section-subtitle">Some of my recent work</p>
-            <div class="project-grid">
-                <div class="project-item">
-                    <img src="project1-thumbnail.jpg" alt="Giftlink project" loading="lazy">
-                    <div class="project-content">
-                        <h3>Giftlink</h3>
-                        <p>A full-stack project enabling users to send gifts to others with a seamless user experience.</p>
-                        <button onclick="window.location.href='https://github.com/mohitchamoIi/fullstack-capstone-project';">
-                            <i class="fas fa-external-link-alt"></i> View Project
-                        </button>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <img src="project2-thumbnail.jpg" alt="Cypher Fusion project" loading="lazy">
-                    <div class="project-content">
-                        <h3>Cypher Fusion</h3>
-                        <p>GUI-based application built on hybrid cryptography for secure data encryption.</p>
-                        <button onclick="window.location.href='https://github.com/mohitchamoIi/hybrid-cryptography';">
-                            <i class="fas fa-external-link-alt"></i> View Project
-                        </button>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <img src="project3-thumbnail.jpg" alt="Unibus project" loading="lazy">
-                    <div class="project-content">
-                        <h3>Unibus</h3>
-                        <p>University bus management system streamlining transportation operations.</p>
-                        <button onclick="window.location.href='https://unibus-beta.vercel.app/';">
-                            <i class="fas fa-external-link-alt"></i> View Project
-                        </button>
-                    </div>
+    <h2>Featured Projects</h2>
+    <p class="section-subtitle">Click any project to explore details</p>
+    <div class="project-grid">
+        <div class="project-item" data-project="giftlink">
+            <div class="project-image-container">
+                <img src="project1-thumbnail.jpg" alt="Giftlink project" loading="lazy">
+                <div class="project-overlay">
+                    <button class="view-details-btn">
+                        <i class="fas fa-expand"></i> View Details
+                    </button>
                 </div>
             </div>
-        </section>
+            <div class="project-content">
+                <h3>Giftlink</h3>
+                <p class="project-brief">Full-stack e-commerce platform for personalized gift delivery</p>
+            </div>
+        </div>
+
+        <div class="project-item" data-project="cypher-fusion">
+            <div class="project-image-container">
+                <img src="project2-thumbnail.jpg" alt="Cypher Fusion project" loading="lazy">
+                <div class="project-overlay">
+                    <button class="view-details-btn">
+                        <i class="fas fa-expand"></i> View Details
+                    </button>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Cypher Fusion</h3>
+                <p class="project-brief">Hybrid cryptography application with military-grade security</p>
+            </div>
+        </div>
+
+        <div class="project-item" data-project="unibus">
+            <div class="project-image-container">
+                <img src="project3-thumbnail.jpg" alt="Unibus project" loading="lazy">
+                <div class="project-overlay">
+                    <button class="view-details-btn">
+                        <i class="fas fa-expand"></i> View Details
+                    </button>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Unibus</h3>
+                <p class="project-brief">Real-time GPS tracking for university bus management</p>
+            </div>
+        </div>
+
+        <!-- Add more projects easily -->
+   <!--     <div class="project-item" data-project="hospital-management">
+            <div class="project-image-container">
+                <img src="project4-thumbnail.jpg" alt="Hospital Management System" loading="lazy">
+                <div class="project-overlay">
+                    <button class="view-details-btn">
+                        <i class="fas fa-expand"></i> View Details
+                    </button>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Hospital Management</h3>
+                <p class="project-brief">Multi-threaded system for patient allocation and scheduling</p>
+            </div>
+        </div>
+
+        <div class="project-item" data-project="village-portal">
+            <div class="project-image-container">
+                <img src="project5-thumbnail.jpg" alt="Village Development Portal" loading="lazy">
+                <div class="project-overlay">
+                    <button class="view-details-btn">
+                        <i class="fas fa-expand"></i> View Details
+                    </button>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Vikash Pariyojnaye</h3>
+                <p class="project-brief">Village development portal with admin dashboard</p>
+            </div>
+        </div>
+    -->
+    </div>
+</section>
+
 
         <section id="contact" class="fade-in">
             <h2>Get In Touch</h2>
@@ -1082,13 +1184,14 @@
     // Dynamic Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Project Data with detailed information
+    // Extended Project Data
     const projectsData = {
         'giftlink': {
             title: 'Giftlink',
             image: 'project1-thumbnail.jpg',
             github: 'https://github.com/mohitchamoIi/fullstack-capstone-project',
-            description: 'A full-stack e-commerce platform enabling users to discover and send personalized gifts with a seamless checkout experience.',
+            live: 'https://giftlink-demo.vercel.app',
+            description: 'Full-stack e-commerce platform for personalized gift delivery',
             overview: 'Giftlink revolutionizes gift-giving by providing an intuitive platform where users can browse curated gift collections, manage their cart, and complete secure transactions. Built with modern web technologies, it demonstrates proficiency in full-stack development, payment integration, and responsive design.',
             role: 'Full-Stack Developer',
             duration: '3 months',
@@ -1109,7 +1212,7 @@
             image: 'project2-thumbnail.jpg',
             github: 'https://github.com/mohitchamoIi/hybrid-cryptography',
             live: null,
-            description: 'Advanced GUI-based encryption application implementing hybrid cryptography for secure data protection.',
+            description: 'Hybrid cryptography application with military-grade security',
             overview: 'Cypher Fusion combines symmetric and asymmetric encryption algorithms to provide military-grade data security. The application features an intuitive graphical interface built with Python and Tkinter, making complex cryptographic operations accessible to non-technical users.',
             role: 'Lead Developer',
             duration: '2 months',
@@ -1126,13 +1229,13 @@
             learnings: 'Mastered cryptographic principles, key management best practices, and the importance of user-friendly security implementations.'
         },
         'unibus': {
-            title: 'Unibus - University Bus Tracking',
+            title: 'Unibus',
             image: 'project3-thumbnail.jpg',
             github: 'https://github.com/mohitchamoIi/unibus',
             live: 'https://unibus-beta.vercel.app/',
-            description: 'Real-time university bus tracking system streamlining campus transportation operations.',
-            overview: 'Unibus solves the common problem of unreliable campus transportation by providing real-time GPS tracking of university buses. Students can view bus locations, estimated arrival times, and route information through an interactive map interface. The system includes admin dashboards for managing routes, schedules, and driver assignments.',
-            role: 'Back end Developer ',
+            description: 'Real-time GPS tracking for university bus management',
+            overview: 'Unibus solves the common problem of unreliable campus transportation by providing real-time GPS tracking of university buses. Students can view bus locations, estimated arrival times, and route information through an interactive map interface.',
+            role: 'Full-Stack Developer & Team Lead',
             duration: '4 months',
             tech: ['HTML/CSS', 'JavaScript', 'Node.js', 'Google Maps API', 'Oracle Database', 'Socket.io'],
             features: [
@@ -1143,21 +1246,52 @@
                 'Student interface with favorite routes and notifications',
                 'WebSocket-based live updates for instant location refresh'
             ],
-            challenges: 'Handling GPS coordinate updates efficiently, optimizing map rendering performance, implementing accurate ETA algorithms accounting for traffic, and ensuring system reliability during peak usage hours.',
-            learnings: 'Developed expertise in geolocation APIs, real-time data streaming with WebSockets, database optimization for location queries, and collaborative team development workflows using Git.'
+            challenges: 'Handling GPS coordinate updates efficiently, optimizing map rendering performance, implementing accurate ETA algorithms accounting for traffic.',
+            learnings: 'Developed expertise in geolocation APIs, real-time data streaming with WebSockets, and database optimization for location queries.'
+        },
+        'hospital-management': {
+            title: 'Hospital Management System',
+            image: 'project4-thumbnail.jpg',
+            github: 'https://github.com/mohitchamoIi/hospital-management',
+            live: null,
+            description: 'Multi-threaded system for patient allocation and scheduling',
+            overview: 'A comprehensive hospital management system featuring multithreading for concurrent patient processing, scheduling algorithms for optimal resource allocation, and synchronization mechanisms to prevent race conditions.',
+            role: 'Backend Developer',
+            duration: '3 months',
+            tech: ['C++', 'Multithreading', 'Semaphores', 'Queue Data Structures', 'Priority Scheduling'],
+            features: [
+                'Multi-threaded patient queue management system',
+                'Priority-based scheduling for emergency cases',
+                'Deadlock prevention using banker\'s algorithm',
+                'Thread synchronization with semaphores and mutexes',
+                'Real-time bed allocation tracking',
+                'Doctor availability scheduling system'
+            ],
+            challenges: 'Preventing race conditions in shared resources, implementing efficient scheduling algorithms, and handling concurrent database access.',
+            learnings: 'Deep understanding of operating system concepts, thread synchronization, and designing concurrent systems.'
+        },
+        'village-portal': {
+            title: 'Vikash Pariyojnaye',
+            image: 'project5-thumbnail.jpg',
+            github: 'https://github.com/mohitchamoIi/village-portal',
+            live: 'https://village-portal.vercel.app',
+            description: 'Village development portal with admin dashboard',
+            overview: 'A government project management portal designed for tracking village development initiatives. Features separate interfaces for village administrators (Pradhan) and citizens, with project tracking, budget management, and progress reporting.',
+            role: 'Full-Stack Developer',
+            duration: '3 months',
+            tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Oracle Database', 'ER Diagrams'],
+            features: [
+                'Role-based access control for Pradhan and citizens',
+                'Project creation and tracking with status updates',
+                'Budget allocation and expenditure monitoring',
+                'Document upload system for project reports',
+                'Dashboard analytics for development metrics',
+                'Citizen feedback and grievance system'
+            ],
+            challenges: 'Designing complex database schemas with proper normalization, implementing role-based authentication, and creating intuitive dashboards for non-technical users.',
+            learnings: 'Enhanced skills in database design, user experience for diverse audiences, and managing project scope in team environments.'
         }
     };
-
-    // Update project buttons to open modals
-    document.querySelectorAll('.project-item button').forEach((button, index) => {
-        const projectKeys = Object.keys(projectsData);
-        const projectKey = projectKeys[index];
-        
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            openProjectModal(projectKey);
-        });
-    });
 
     // Create modal HTML structure
     const modalHTML = `
@@ -1212,9 +1346,21 @@
 
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
+    // Fixed: Attach click events to project cards properly
+    document.querySelectorAll('.project-item').forEach((card) => {
+        card.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent any default behavior
+            e.stopPropagation(); // Stop event bubbling
+            const projectKey = this.getAttribute('data-project');
+            openProjectModal(projectKey);
+        });
+    });
+
     // Open modal function
     function openProjectModal(projectKey) {
         const project = projectsData[projectKey];
+        if (!project) return;
+        
         const modal = document.getElementById('projectModal');
         
         // Populate modal content
@@ -1318,7 +1464,7 @@
     });
 </script>
 
+
 </body>
 </html>
-
 
