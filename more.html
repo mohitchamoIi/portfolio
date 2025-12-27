@@ -1091,9 +1091,9 @@
     <h2>Featured Projects</h2>
     <p class="section-subtitle">Click any project to explore details</p>
     <div class="project-grid">
-        <div class="project-item" data-project="giftlink">
+        <div class="project-item" data-project="TapeVibe">
             <div class="project-image-container">
-                <img src="project1-thumbnail.jpg" alt="Giftlink project" loading="lazy">
+                <img src="project1-thumbnail.jpg" alt="TapeVibe project" loading="lazy">
                 <div class="project-overlay">
                     <button class="view-details-btn">
                         <i class="fas fa-expand"></i> View Details
@@ -1101,8 +1101,8 @@
                 </div>
             </div>
             <div class="project-content">
-                <h3>Giftlink</h3>
-                <p class="project-brief">Full-stack e-commerce platform for personalized gift delivery</p>
+                <h3>TapeVibe</h3>
+                <p class="project-brief"> Retro Mixtape Web App 🎵</p>
             </div>
         </div>
 
@@ -1214,27 +1214,27 @@
 
     // Extended Project Data
     const projectsData = {
-        'giftlink': {
+        'TapeVibe': {
             title: 'Giftlink',
             image: 'project1-thumbnail.jpg',
             github: 'https://github.com/mohitchamoIi/fullstack-capstone-project',
             live: 'https://giftlink-demo.vercel.app',
-            description: 'Full-stack e-commerce platform for personalized gift delivery',
-            overview: 'Giftlink revolutionizes gift-giving by providing an intuitive platform where users can browse curated gift collections, manage their cart, and complete secure transactions. Built with modern web technologies, it demonstrates proficiency in full-stack development, payment integration, and responsive design.',
-            role: 'Full-Stack Developer',
-            duration: '3 months',
-            tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe API', 'JWT Auth'],
-            features: [
-                'User authentication with JWT tokens and secure session management',
-                'Product catalog with advanced filtering, sorting, and search functionality',
-                'Shopping cart with persistent state across sessions',
-                'Integrated Stripe payment gateway for secure transactions',
-                'Order tracking and history dashboard',
-                'Responsive design optimized for mobile, tablet, and desktop'
-            ],
-            challenges: 'Implemented real-time cart synchronization across multiple devices, handled payment webhook security, and optimized database queries for product filtering.',
-            learnings: 'Gained deep understanding of payment gateway integration, secure authentication patterns, and state management in distributed systems.'
-        },
+            description: 'Retro digital mixtape creator with nostalgic cassette player experience',
+    overview: 'TapeVibe brings back the nostalgic feeling of creating and sharing mixtapes. Users can curate up to 5 songs from Spotify, YouTube, or SoundCloud, and share them via a unique link. Recipients experience an authentic retro cassette player interface with animated spinning reels and insert/eject animations.',
+    role: 'Full-Stack Developer',
+    duration: '1 month',
+    tech: ['HTML5', 'CSS3', 'Vanilla JavaScript', 'Spotify Embed API', 'YouTube IFrame API', 'SoundCloud Embed'],
+    features: [
+        'Multi-platform integration supporting Spotify, YouTube, and SoundCloud tracks',
+        'Authentic retro cassette player UI with animated spinning reels',
+        'Insert/eject tape animations with dynamic recipient name labels',
+        'Synchronized playback controls across embedded players using messaging API',
+        'URL-encoded shareable mixtapes with auto-insert functionality',
+        'Fully responsive design optimized for desktop and mobile devices'
+    ],
+    challenges: 'Implemented cross-platform player synchronization using postMessage API for Spotify embeds, handled different embed formats across streaming platforms, and created smooth CSS animations for cassette reel physics that sync with actual audio playback.',
+    learnings: 'Mastered iframe messaging protocols, learned advanced CSS animations and keyframe synchronization, and gained experience in building immersive retro UI/UX without frameworks while maintaining clean vanilla JavaScript architecture.'
+},
         'cypher-fusion': {
             title: 'Cypher Fusion',
             image: 'project2-thumbnail.jpg',
@@ -1494,5 +1494,6 @@
 
 </body>
 </html>
+
 
 
