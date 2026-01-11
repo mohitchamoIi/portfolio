@@ -395,12 +395,6 @@
         }
 
         /* Compact Projects Grid */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.8rem;
-    margin-top: 3rem;
-}
 
 .project-item {
     background: var(--glass-bg);
@@ -964,8 +958,101 @@
         flex-direction: column;
     }
 }
+.project-stack {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    margin: 4rem auto;
+}
 
-    </style>
+.project-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(22,27,34,0.8);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0,255,255,0.2);
+    backdrop-filter: blur(20px);
+    cursor: grab;
+    transition: 0.4s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 20px 50px rgba(0,255,255,0.15);
+    touch-action: none;
+
+}
+
+.project-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+}
+
+.project-card h3 {
+    color: var(--primary-cyan);
+    margin-bottom: 0.3rem;
+}
+
+.project-card p {
+    color: var(--text-secondary);
+}
+
+/* stacked look */
+.project-card:nth-child(1){ z-index:3 }
+.project-card:nth-child(2){ transform: translate(12px,12px); z-index:2 }
+.project-card:nth-child(3){ transform: translate(24px,24px); z-index:1 }
+
+.project-toggle{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-bottom:2rem;
+}
+
+.project-toggle button{
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,255,0.3);
+  padding:0.6rem 1.4rem;
+  border-radius:12px;
+  color:white;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.project-toggle button.active{
+  background: linear-gradient(135deg, #00ffff, #00ccff);
+  color:#0d1117;
+}
+
+/* Grid Mode */
+.project-stack.grid{
+  width:100%;
+  height:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;
+}
+
+.project-stack.grid .project-card{
+  position:relative;
+  transform:none !important;
+}
+.project-grid {
+  position: relative;
+  height: 360px;              /* stack needs a fixed stage */
+}
+
+.project-item {
+  position: absolute;        /* allows free movement */
+  top: 0;
+  left: 0;
+  width: 100%;
+  touch-action: none;        /* allow swipe */
+}
+
+
+</style>
     
 </head>
 <body>
@@ -1089,86 +1176,34 @@
 
         <section id="projects" class="fade-in">
     <h2>Featured Projects</h2>
-    <p class="section-subtitle">Click any project to explore details</p>
-    <div class="project-grid">
-        <div class="project-item" data-project="TapeVibe">
-            <div class="project-image-container">
-                <img src="project1-thumbnail.jpg" alt="TapeVibe project" loading="lazy">
-                <div class="project-overlay">
-                    <button class="view-details-btn">
-                        <i class="fas fa-expand"></i> View Details
-                    </button>
-                </div>
-            </div>
-            
-            <div class="project-content">
-                <h3>TapeVibe</h3>
-                <p class="project-brief"> Retro Mixtape Web App 🎵</p>
-            </div>
-        </div>
-
-        <div class="project-item" data-project="cypher-fusion">
-            <div class="project-image-container">
-                <img src="project2-thumbnail.jpg" alt="Cypher Fusion project" loading="lazy">
-                <div class="project-overlay">
-                    <button class="view-details-btn">
-                        <i class="fas fa-expand"></i> View Details
-                    </button>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>Cypher Fusion</h3>
-                <p class="project-brief">Hybrid cryptography application with military-grade security</p>
-            </div>
-        </div>
-
-        <div class="project-item" data-project="unibus">
-            <div class="project-image-container">
-                <img src="project3-thumbnail.jpg" alt="Unibus project" loading="lazy">
-                <div class="project-overlay">
-                    <button class="view-details-btn">
-                        <i class="fas fa-expand"></i> View Details
-                    </button>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>Unibus</h3>
-                <p class="project-brief">Real-time GPS tracking for university bus management</p>
-            </div>
-        </div>
-
-        <!-- Add more projects easily -->
-   <!--     <div class="project-item" data-project="hospital-management">
-            <div class="project-image-container">
-                <img src="project4-thumbnail.jpg" alt="Hospital Management System" loading="lazy">
-                <div class="project-overlay">
-                    <button class="view-details-btn">
-                        <i class="fas fa-expand"></i> View Details
-                    </button>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>Hospital Management</h3>
-                <p class="project-brief">Multi-threaded system for patient allocation and scheduling</p>
-            </div>
-        </div>
-
-        <div class="project-item" data-project="village-portal">
-            <div class="project-image-container">
-                <img src="project5-thumbnail.jpg" alt="Village Development Portal" loading="lazy">
-                <div class="project-overlay">
-                    <button class="view-details-btn">
-                        <i class="fas fa-expand"></i> View Details
-                    </button>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>Vikash Pariyojnaye</h3>
-                <p class="project-brief">Village development portal with admin dashboard</p>
-            </div>
-        </div>
-    -->
+    <div class="project-toggle">
+    <button id="stackBtn" class="active">Stack</button>
+    <button id="gridBtn">Grid</button>
     </div>
+
+    <p class="section-subtitle">Click any project to explore details</p>
+    <div class="project-stack" id="projectStack">
+
+  <div class="project-card" data-project="TapeVibe">
+    <img src="project1-thumbnail.jpg">
+    <h3>TapeVibe</h3>
+    <p>Retro Mixtape Web App 🎵</p>
+  </div>
+
+  <div class="project-card" data-project="cypher-fusion">
+    <img src="project2-thumbnail.jpg">
+    <h3>Cypher Fusion</h3>
+    <p>Hybrid cryptography engine 🔐</p>
+  </div>
+
+  <div class="project-card" data-project="unibus">
+    <img src="project3-thumbnail.jpg">
+    <h3>Unibus</h3>
+    <p>Real-time bus tracking 🚍</p>
+  </div>
+
+</div>
+
 </section>
 
 
@@ -1183,7 +1218,7 @@
                 <input type="email" id="email" placeholder="your email" required>
                 
                 <label for="message">Your Message</label>
-                <textarea id="message" placeholder="Tell me about your project..." required></textarea>
+                <textarea id="message" placeholder="Hello..." required></textarea>
                 
                 <button type="submit">
                     <i class="fas fa-paper-plane"></i> Send Message
@@ -1490,12 +1525,107 @@
             }
         });
     });
+// Draggable Project Cards
+let current = 0;
+
+const cards = [...document.querySelectorAll(".project-card")].reverse();
+
+let activeIndex = 0;
+
+function layoutCards(){
+  cards.forEach((card,i)=>{
+    const pos = (i - activeIndex + cards.length) % cards.length;
+    card.style.transition = "0.5s cubic-bezier(.16,1,.3,1)";
+    card.style.transform = `translate(${pos*14}px,${pos*14}px) scale(${1 - pos*0.04})`;
+    card.style.zIndex = 100 - pos;
+    card.style.opacity = pos > 3 ? 0 : 1;
+    card.style.pointerEvents = pos === 0 ? "auto" : "none";
+  });
+}
+layoutCards();
+
+cards.forEach(card=>{
+  let startX = 0;
+  let currentX = 0;
+  let velocity = 0;
+  let lastTime = 0;
+  let dragging = false;
+  let wasDragged = false;
+
+  card.addEventListener("pointerdown", e=>{
+    if(card !== cards[activeIndex]) return;
+    dragging = true;
+    wasDragged = false;
+    startX = e.clientX;
+    lastTime = Date.now();
+    card.style.transition = "none";
+    card.setPointerCapture(e.pointerId);
+  });
+
+  card.addEventListener("pointermove", e=>{
+    if(!dragging) return;
+    currentX = e.clientX - startX;
+    const now = Date.now();
+    velocity = (currentX) / (now - lastTime);
+    lastTime = now;
+
+    if(Math.abs(currentX) > 6) wasDragged = true;
+
+    card.style.transform = `translate(${currentX}px,0) rotate(${currentX/15}deg)`;
+  });
+
+  card.addEventListener("pointerup", ()=>{
+    dragging = false;
+    card.style.transition = "0.45s cubic-bezier(.16,1,.3,1)";
+
+    const throwPower = currentX + velocity * 500;
+
+    if(Math.abs(throwPower) > 160){
+      card.style.transform = `translate(${throwPower>0?1200:-1200}px,0) rotate(${throwPower/6}deg)`;
+
+      setTimeout(()=>{
+        activeIndex = (activeIndex + 1) % cards.length;
+        card.style.transition = "none";
+        card.style.transform = "";
+        layoutCards();
+      },300);
+    } else {
+      // SNAP BACK
+      card.style.transform = "";
+    }
+
+    currentX = 0;
+  });
+
+  card.addEventListener("click", ()=>{
+    if(!wasDragged){
+      openProjectModal(card.dataset.project);
+    }
+  });
+});
+
+
+const stackBtn = document.getElementById("stackBtn");
+const gridBtn = document.getElementById("gridBtn");
+const stack = document.getElementById("projectStack");
+
+stackBtn.onclick = ()=>{
+  stack.classList.remove("grid");
+  stackBtn.classList.add("active");
+  gridBtn.classList.remove("active");
+}
+
+gridBtn.onclick = ()=>{
+  stack.classList.add("grid");
+  gridBtn.classList.add("active");
+  stackBtn.classList.remove("active");
+}
+
 </script>
 
 
 </body>
 </html>
-
 
 
 
