@@ -9,7 +9,14 @@
 body
 {
     overflow-x: hidden;
+    background-attachment: scroll;
+    background-color: #222;
+    margin: 0;
 }
+.home {
+  background: transparent;
+}
+
 .hero-header
 {
     width:100%;
