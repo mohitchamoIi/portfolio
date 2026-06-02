@@ -32,7 +32,7 @@ export default function Navigation() {
             <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-white font-bold text-lg group-hover:shadow-lg group-hover:shadow-accent/50 transition-all">
               M
             </div>
-            <span className="text-white font-semibold hidden sm:inline">Mohit</span>
+            <span className="text-white font-semibold hidden sm:inline">Mohit Chamoli</span>
           </Link>
 
           {/* Desktop Menu */}
