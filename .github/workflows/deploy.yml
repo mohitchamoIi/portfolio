@@ -4,6 +4,7 @@ on:
 push:
 branches:
 - main
+workflow_dispatch:
 
 permissions:
 contents: read
@@ -38,14 +39,19 @@ steps:
 ```
 
 deploy:
-environment:
-name: github-pages
+needs: build
+runs-on: ubuntu-latest
 
 ```
-runs-on: ubuntu-latest
-needs: build
+permissions:
+  pages: write
+  id-token: write
+
+environment:
+  name: github-pages
 
 steps:
-  - id: deployment
+  - name: Deploy to GitHub Pages
+    id: deployment
     uses: actions/deploy-pages@v4
 ```
