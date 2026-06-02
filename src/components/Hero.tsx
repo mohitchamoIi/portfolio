@@ -132,7 +132,7 @@ export default function Hero({ showImage = true }: HeroProps) {
               View My Work
             </motion.a>
             <motion.a
-              href="/mohitcv.pdf"
+              href="/portfolio/assets/docs/mohitcv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary text-center"
