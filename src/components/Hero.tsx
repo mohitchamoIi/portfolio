@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import profilePhoto from '../assets/images/profilephoto.jpg'
 
 interface HeroProps {
   showImage?: boolean
@@ -67,7 +68,7 @@ export default function Hero({ showImage = true }: HeroProps) {
               {/* Image */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-accent/20 bg-surface">
                 <img
-                  src="/src/assets/images/profilephoto.jpg"
+                  src={profilePhoto}
                   alt="Mohit Chamoli"
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                 />
