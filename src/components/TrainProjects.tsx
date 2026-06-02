@@ -24,11 +24,13 @@ function Train({
   setHoveredId,
   selectedId,
   setSelectedId,
+  isMobile
 }: {
   hoveredId: number | null
   setHoveredId: (id: number | null) => void
   selectedId: number | null
   setSelectedId: (id: number | null) => void
+  isMobile: boolean
 }) {
   const ref = useRef<THREE.Group>(null)
   const scroll = useScroll()
@@ -46,8 +48,20 @@ function Train({
     [cabin, seat]
   )
 
-  const targetCameraPos = useRef(new THREE.Vector3(-10, 6, 12))
-  const targetCameraLookAt = useRef(new THREE.Vector3(0, 2, 0))
+  const defaultCamPos = useMemo(() => {
+    return isMobile
+      ? new THREE.Vector3(-8, 7, 14)
+      : new THREE.Vector3(-10, 6, 12)
+  }, [isMobile])
+  
+  const defaultLookAt = useMemo(() => {
+    return isMobile
+      ? new THREE.Vector3(0, 2.5, -3)
+      : new THREE.Vector3(0, 2, 0)
+  }, [isMobile])
+
+  const targetCameraPos = useRef(defaultCamPos)
+  const targetCameraLookAt = useRef(defaultLookAt)
 
   useFrame((_, delta) => {
     if (ref.current) {
@@ -65,20 +79,20 @@ function Train({
     if (selectedId !== null) {
       const selectedIndex = projects.findIndex((p) => p.id === selectedId)
       if (selectedIndex !== -1) {
-        // Position camera closer to selected carriage
-        targetCameraPos.current.set(
-          -5 + selectedIndex * 1.5,
-          4.5,
-          8 - selectedIndex * 28
-        )
-        targetCameraLookAt.current.set(0, 2, -selectedIndex * 28)
+        const selPos = isMobile
+          ? new THREE.Vector3(-4 + selectedIndex * 1.2, 5, 9 - selectedIndex * 28)
+          : new THREE.Vector3(-5 + selectedIndex * 1.5, 4.5, 8 - selectedIndex * 28)
+        
+        const selLookAt = new THREE.Vector3(0, 2, -selectedIndex * 28)
+        
+        targetCameraPos.current.set(selPos.x, selPos.y, selPos.z)
+        targetCameraLookAt.current.set(selLookAt.x, selLookAt.y, selLookAt.z)
       }
     } else {
-      // Reset camera to immersive lower angle
-      targetCameraPos.current.set(-10, 6, 12)
-      targetCameraLookAt.current.set(0, 2, 0)
+      targetCameraPos.current.set(defaultCamPos.x, defaultCamPos.y, defaultCamPos.z)
+      targetCameraLookAt.current.set(defaultLookAt.x, defaultLookAt.y, defaultLookAt.z)
     }
-  }, [selectedId])
+  }, [selectedId, isMobile, defaultCamPos, defaultLookAt])
 
   return (
     <Merged castShadow receiveShadow meshes={meshes}>
@@ -104,6 +118,7 @@ function Train({
                 }
               }}
               scale={project.featured ? 1.1 : 1}
+              isMobile={isMobile}
             />
           ))}
         </group>
@@ -155,6 +170,7 @@ const Cabin = ({
   onHoverOut,
   onClick,
   scale = 1,
+  isMobile,
   ...props
 }: {
   models: any
@@ -167,6 +183,7 @@ const Cabin = ({
   onHoverOut: () => void
   onClick: () => void
   scale: number
+  isMobile: boolean
   [key: string]: any
 }) => {
   const groupRef = useRef<THREE.Group>(null)
@@ -181,6 +198,9 @@ const Cabin = ({
     }
   })
 
+  const textSize = isMobile ? 0.35 : 0.4
+  const categorySize = isMobile ? 0.14 : 0.16
+
   return (
     <group
       ref={groupRef}
@@ -189,11 +209,15 @@ const Cabin = ({
       onPointerOver={(e) => {
         e.stopPropagation()
         onHover()
-        document.body.style.cursor = 'pointer'
+        if (!isMobile) {
+          document.body.style.cursor = 'pointer'
+        }
       }}
       onPointerOut={() => {
         onHoverOut()
-        document.body.style.cursor = 'auto'
+        if (!isMobile) {
+          document.body.style.cursor = 'auto'
+        }
       }}
       onClick={(e) => {
         e.stopPropagation()
@@ -214,20 +238,20 @@ const Cabin = ({
       )}
 
       {/* Subtle project branding on carriage side */}
-      <group position={[2.8, 2.2, 0]} rotation={[0, Math.PI / 2, 0]}>
+      <group position={[2.8, 2.2, 0]}>
         <Text
-          fontSize={0.4}
+          fontSize={textSize}
           color={isHovered || isSelected ? '#ffffff' : (project.featured ? '#9ecfff' : '#73baff')}
-          anchorX="center"
+          anchorX="left"
           anchorY="middle"
         >
           {project.name}
         </Text>
         <Text
-          fontSize={0.16}
+          fontSize={categorySize}
           color={isHovered || isSelected ? '#cfe6ff' : '#a0aec0'}
           position={[0, -0.35, 0]}
-          anchorX="center"
+          anchorX="left"
           anchorY="middle"
         >
           {project.category}
@@ -251,6 +275,8 @@ export default function TrainProjects() {
   const [loading, setLoading] = useState(true)
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  
   const selectedProject = useMemo(
     () => projects.find((p) => p.id === selectedId),
     [selectedId]
@@ -259,6 +285,15 @@ export default function TrainProjects() {
     () => projects.find((p) => p.id === hoveredId),
     [hoveredId]
   )
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Fake loading for skeleton screen
   useEffect(() => {
@@ -281,9 +316,9 @@ export default function TrainProjects() {
     <section className="relative h-[100vh]">
       {/* 3D Canvas */}
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={isMobile ? [1, 1.2] : [1, 1.5]}
         shadows
-        camera={{ position: [-10, 6, 12], fov: 45 }}
+        camera={{ position: isMobile ? [-8, 7, 14] : [-10, 6, 12], fov: isMobile ? 50 : 45 }}
         gl={{ alpha: false }}
       >
         {/* Fog for atmospheric depth */}
@@ -321,6 +356,7 @@ export default function TrainProjects() {
               setHoveredId={setHoveredId}
               selectedId={selectedId}
               setSelectedId={setSelectedId}
+              isMobile={isMobile}
             />
           </ScrollControls>
 
@@ -367,7 +403,7 @@ export default function TrainProjects() {
 
       {/* Hover Preview Card */}
       <AnimatePresence>
-        {hoveredProject && !selectedProject && (
+        {hoveredProject && !selectedProject && !isMobile && (
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -416,16 +452,23 @@ export default function TrainProjects() {
             />
             {/* Modal */}
             <motion.div
-              initial={{ scale: 0.88, opacity: 0, y: 30 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.88, opacity: 0, y: 30 }}
+              initial={isMobile ? { y: '100%', opacity: 1 } : { scale: 0.88, opacity: 0, y: 30 }}
+              animate={isMobile ? { y: 0, opacity: 1 } : { scale: 1, opacity: 1, y: 0 }}
+              exit={isMobile ? { y: '100%', opacity: 1 } : { scale: 0.88, opacity: 0, y: 30 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-xl max-h-[85vh] bg-bg/98 backdrop-blur-2xl border border-accent/20 rounded-2xl p-7 shadow-2xl overflow-y-auto"
+              className={
+                isMobile
+                  ? 'absolute bottom-0 left-0 right-0 w-full max-h-[80vh] bg-bg/98 backdrop-blur-2xl border-t border-accent/20 rounded-t-3xl p-5 shadow-2xl overflow-y-auto'
+                  : 'relative w-full max-w-xl max-h-[85vh] bg-bg/98 backdrop-blur-2xl border border-accent/20 rounded-2xl p-7 shadow-2xl overflow-y-auto'
+              }
               onClick={(e) => e.stopPropagation()}
             >
+              {isMobile && (
+                <div className="w-12 h-1 bg-surface/60 rounded-full mx-auto mb-4" />
+              )}
               <div className="flex justify-between items-center mb-5">
                 <div>
-                  <h3 className="text-2xl font-bold text-white">{selectedProject.name}</h3>
+                  <h3 className={isMobile ? "text-xl font-bold text-white" : "text-2xl font-bold text-white"}>{selectedProject.name}</h3>
                   <span className="text-xs uppercase tracking-wider text-accent">
                     {selectedProject.category}
                   </span>
@@ -442,7 +485,7 @@ export default function TrainProjects() {
                 <img
                   src={selectedProject.screenshot}
                   alt={selectedProject.name}
-                  className="w-full h-48 object-cover"
+                  className={isMobile ? "w-full h-40 object-cover" : "w-full h-48 object-cover"}
                 />
               </div>
 
