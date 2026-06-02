@@ -1,91 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Mohit Chamoli - Software Engineer | Full-Stack Developer" />
     <meta name="google-site-verification" content="gyhhhLf39GSe1FlGo3YhjzAMxnB8ARian_79xgEJ85c" />
-    <title>mohit's Portfolio </title>
-    <link rel="stylesheet" href="style.css">
-    <!----Font awesome cdn  font icon css  -->
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-
-</head>
-<body>
-     <div class="hero-header">
-        <div class="wrapper">
-            <header>
-                <div class="logo">
-                    <i class="fa-solid fa-m"></i>
-                    <div class="logo-text">Mohit chamoli</div>
-                </div>
-                <nav>
-                    <div class="togglebtn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <ul class="navlinks">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="more.html">Portfolio</a></li>
-                        <li><a href="./mohitcv.pdf" target="_blank">Resume</a></li>
-                        <li><a href="https://github.com/mohitchamoIi">github</a></li>
-                        <li><a href="mailto:mohitchamoli1207@gmail.com">Contact</a></li>
-                    </ul>
-                </nav>
-            </header>
-            <div class="container">
-                 <div class="hero-pic">
-                    <img src="profilephoto.jpg" alt="profile pic">
-                 </div>
-                 <div class="hero-text">
-                    <h5>Hi I'm <span class="input">Backend Developer</span></h5>
-                    <h1>Mohit chamoli</h1>
-                    <p> I am a Computer Science student at Graphic Era Hill University.
-                        I am passionate about software development, web technologies, and open-source.
-                        I enjoy learning new things and working on projects that challenge me to grow as a developer.
-                    </p>
-
-<div class="btn-group"> 
-    <a href="./mohitcv.pdf" target="_blank" class="btn active">
-         Download CV
-    </a>
-    <a href="more.html" class="btn">more..</a>
-</div>
-
-                    <div class="social">
-                        <a href="https://www.facebook.com/profile.php?id=61572281855611"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="https://in.linkedin.com/in/mohit-chamoli-a837a7348"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/mohitchamoli09?igsh=eWd2MnR0b29laDk1"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://github.com/mohitchamoIi"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fa-brands fa-pintrest"></i></a>
-                    </div>
-                 </div>
-            </div>
-        </div>
-     </div>
-     <!---typed js for typing text effect-->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
-     <script>
-        /** creating button click show hide navbar **/
-        var togglebtn=document.querySelector(".togglebtn");
-        var nav=document.querySelector(".navlinks");
-        var links=document.querySelector(".navlinks li");
-
-        togglebtn.addEventListener("click", function(){
-            this.classList.toggle("click");
-            nav.classList.toggle("open");
-        })
-        setTimeout(function(){
-        var typed=new Typed(".input",{
-            strings:["Backend Developer     ","Tech enthusiast   ","Software engineer    "],
-            typeSpeed:70,
-            backSpeed:55,
-            loop:true
-        })},1000);
-     </script>
-</body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Mohit Chamoli - Software Engineer</title>
+  </head>
+  <body class="bg-bg text-text-primary">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
 
 

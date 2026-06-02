@@ -1,0 +1,76 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text-primary;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(0, 123, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-accent hover:bg-accent-alt text-bg rounded-xl font-semibold transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-surface border border-text-secondary/20 text-text-primary rounded-xl font-semibold transition-all duration-300 hover:border-accent/40 hover:bg-surface/80;
+  }
+
+  .glass {
+    @apply backdrop-blur-md bg-surface/30 border border-text-secondary/10 rounded-2xl;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-accent-alt bg-clip-text text-transparent;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-text-primary mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-text-secondary mb-12;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+  }
+}
+
+@keyframes spotlight {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(100px) translateY(-50px); }
+  50% { transform: translateX(-50px) translateY(100px); }
+  75% { transform: translateX(-100px) translateY(-100px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+.spotlight {
+  animation: spotlight 8s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 123, 255, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 123, 255, 0.8);
+}
